@@ -18,6 +18,7 @@ def test_checkMate():
     update_atrs(gs)
 
     assert checkMate(gs, turn="white") == True
+    printBoard(gs.board)
 
 
 def test_move_piece():
@@ -41,6 +42,7 @@ def test_move_piece():
     update_atrs(gs)
 
     assert move_piece([(7,4),(7,3)], gs, turn="white") == False
+    printBoard(gs.board)
 
 
 def test_staleMate():
@@ -57,3 +59,26 @@ def test_staleMate():
     ]
     update_atrs(gs)
     staleMate(gs, turn="white")
+    printBoard(gs.board)
+    
+def printBoard(board):
+    for a in board:
+        for b in a:
+            if type(b) is King:
+                print("K", end="")
+            elif type(b) is Queen:
+                print("Q", end="")
+            elif type(b) is Knight:
+                print("N", end="")
+            elif type(b) is Bishop:
+                print("B", end="")
+            elif type(b) is Castle:
+                print("R", end="")
+            else:
+                print("-", end="")
+        print("")
+    print("")
+if __name__ == "__main__":
+    test_checkMate()
+    test_move_piece()
+    test_staleMate()

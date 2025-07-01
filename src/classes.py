@@ -492,9 +492,13 @@ class Queen(Piece):
 
         for dx, dy in directions:
             x_temp, y_temp = x + dx, y + dy
+            spaces = 3
             while 0 <= x_temp < len(board) and 0 <= y_temp < len(board[x_temp]):
+                spaces = spaces-1
+                if spaces < 0:
+                    break
                 if board[x_temp][y_temp] != "--":
-                    if board[x_temp][y_temp].color == self.color:
+                    if board[x_temp][y_temp].color == self.color :
                         break
                     else:
                         moves.append((x_temp, y_temp))
@@ -502,6 +506,7 @@ class Queen(Piece):
                 moves.append((x_temp, y_temp))
                 x_temp += dx
                 y_temp += dy
+                
 
         return moves
 
@@ -671,14 +676,14 @@ class Knight(Piece):
         direction = 1 if self.color == "white" else -1
 
         potential_moves = [
-            (x + 2 * direction, y + 1),
-            (x + 2 * direction, y - 1),
-            (x + 1 * direction, y + 2),
-            (x + 1 * direction, y - 2),
-            (x - 1 * direction, y + 2),
-            (x - 1 * direction, y - 2),
-            (x - 2 * direction, y + 1),
-            (x - 2 * direction, y - 1),
+            (x + 3 * direction, y + 1),
+            (x + 3 * direction, y - 1),
+            (x + 1 * direction, y + 3),
+            (x + 1 * direction, y - 3),
+            (x - 1 * direction, y + 3),
+            (x - 1 * direction, y - 3),
+            (x - 3 * direction, y + 1),
+            (x - 3 * direction, y - 1),
         ]
 
         for move in potential_moves:
@@ -745,7 +750,7 @@ class Pawn(Piece):
         # Check for forward moves
         if 0 <= x + self.direction <= 7 and board[x + self.direction][y] == "--":
             moves.append((x + self.direction, y))
-            if x == self.start_row and board[x + 2 * self.direction][y] == "--":
+            if x == self.start_row:
                 moves.append((x + 2 * self.direction, y))
 
         # Check for capturing moves
